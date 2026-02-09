@@ -1,10 +1,10 @@
 [
   {
     "question": "What is Kubernetes?",
-    "expected_topic": "container orchestration"
+    "expected_answer": "Kubernetes is a container orchestration platform"
   },
   {
     "question": "Explain Blue Green deployment",
-    "expected_topic": "deployment strategy"
+    "expected_answer": "Blue Green deployment is a deployment strategy with two environments"
   }
 ]
