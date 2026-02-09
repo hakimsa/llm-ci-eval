@@ -1,0 +1,10 @@
+[
+  {
+    "question": "What is Kubernetes?",
+    "expected_topic": "container orchestration"
+  },
+  {
+    "question": "Explain Blue Green deployment",
+    "expected_topic": "deployment strategy"
+  }
+]
