@@ -1,20 +1,23 @@
+from openai import OpenAI
 import json
-import sys
 import os
-import openai
+import sys
 from statistics import mean
 
+client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
 
-openai.api_key = os.environ["OPENAI_API_KEY"]
-
-THRESHOLD = 4.0  # calidad mínima
+THRESHOLD = 4.0
 
 def ask_llm(prompt):
-    return openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
-        messages=[{"role": "user", "content": prompt}],
+    response = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[
+            {"role": "user", "content": prompt}
+        ],
         temperature=0
-    )["choices"][0]["message"]["content"]
+    )
+    return response.choices[0].message.content
+
 
 def judge(answer, question):
     with open("eval/judge_prompt.txt") as f:
@@ -26,8 +29,10 @@ Answer: {answer}
 
 {judge_prompt}
 """
+
     result = ask_llm(full_prompt)
     return json.loads(result)
+
 
 with open("eval/test_cases.json") as f:
     tests = json.load(f)
